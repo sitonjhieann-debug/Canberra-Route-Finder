@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Canberra Route Finder</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="app-header">
+    <div class="brand">
+        <div class="brand-icon">✦</div>
+
+        <div>
+            <h1>Canberra Route Finder</h1>
+            <p>City / Street Graph Implementation</p>
+        </div>
+    </div>
+
+    <span class="header-badge">Data Structures & Algorithms</span>
+</header>
+
+<main class="app-container">
+
+    <!-- COMPACT CONTROLS -->
+
+    <section class="search-panel">
+
+        <div class="horizontal-controls">
+
+            <div class="control-field">
+                <label for="start">Starting Point</label>
+
+                <select id="start">
+                    <option value="">Select Start</option>
+
+                    {% for vertex in vertices %}
+                    <option value="{{ vertex }}">{{ vertex }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="control-field">
+                <label for="destination">Destination</label>
+
+                <select id="destination">
+                    <option value="">Select Destination</option>
+
+                    {% for vertex in vertices %}
+                    <option value="{{ vertex }}">{{ vertex }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="control-field">
+                <label for="algorithm">Search Algorithm</label>
+
+                <select id="algorithm">
+                    {% for algorithm in algorithms %}
+                    <option value="{{ algorithm }}">{{ algorithm }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button id="findRouteBtn" type="button">Find Route</button>
+            <button id="resetBtn" type="button">Reset</button>
+
+        </div>
+
+    </section>
+
+    <!-- DASHBOARD -->
+
+    <section class="dashboard-content">
+
+        <!-- LEFT PANEL -->
+
+        <aside class="info-panel">
+
+            <h2>Route Information</h2>
+
+            <p class="section-description">
+                Select your starting point and destination.
+            </p>
+
+            <div class="status-box">
+
+                <span class="result-label">SEARCH STATUS</span>
+
+                <div id="searchStatus">Ready to Search</div>
+
+                <p id="statusMessage">
+                    Click a vertex on the map or use the dropdowns.
+                </p>
+
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">ALGORITHM USED</span>
+                <div id="algorithmResult">—</div>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">STARTING POINT</span>
+                <div id="startResult">—</div>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">DESTINATION</span>
+                <div id="destinationResult">—</div>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">TOTAL ROUTE COST</span>
+                <div id="costResult">—</div>
+                <small>Based on map-coordinate distance</small>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">VISITED INTERSECTIONS</span>
+                <div id="visitedResult">—</div>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">FINAL ROUTE</span>
+                <div id="routeResult">—</div>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">EXPLORATION ORDER</span>
+                <div id="explorationResult">—</div>
+            </div>
+
+        </aside>
+
+        <!-- RIGHT PANEL -->
+
+        <section class="map-panel">
+
+            <div class="map-header">
+
+                <div>
+                    <h2>Canberra Street Map</h2>
+                    <p class="section-description">
+                        Click vertices to select your route.
+                    </p>
+                </div>
+
+                <span class="map-badge">32 Vertices · 46 Edges</span>
+
+            </div>
+
+            <div class="map-instructions" id="mapInstructions">
+                <span class="instruction-dot"></span>
+                Step 1: Click a vertex to select your starting point.
+            </div>
+
+            <div id="mapViewport">
+
+                <div id="mapWrapper">
+
+                    <img
+                        id="canberraMap"
+                        src="{{ url_for('static', filename='CANBERRA MAP.png') }}"
+                        alt="Canberra Street Map"
+                    >
+
+                    <svg
+                        id="routeOverlay"
+                        viewBox="0 0 720 1612"
+                        preserveAspectRatio="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                    </svg>
+
+                </div>
+
+            </div>
+
+            <div class="map-legend">
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-start"></span>
+                    Starting Point
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-goal"></span>
+                    Destination
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-explored"></span>
+                    Explored
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-route"></span>
+                    Final Route
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+<!-- Coordinates provided by Flask -->
+<script id="vertexData" type="application/json">
+    {{ vertex_data | tojson }}
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

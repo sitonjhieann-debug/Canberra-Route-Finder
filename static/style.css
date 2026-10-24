@@ -1,0 +1,453 @@
+
+:root {
+    --pink: #df176c;
+    --pink-dark: #b90f56;
+    --pink-light: #fce7f1;
+    --background: #fff7fb;
+    --border: #f2d9e6;
+    --text: #273047;
+    --muted: #7b86a0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+}
+
+h1, h2, p {
+    margin-top: 0;
+}
+
+h1 {
+    color: var(--pink);
+    font-size: 25px;
+    margin-bottom: 3px;
+}
+
+h2 {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+p {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 22px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: var(--pink);
+    color: white;
+    font-size: 24px;
+}
+
+.brand p {
+    margin: 0;
+}
+
+.header-badge, .map-badge {
+    background: var(--pink-light);
+    color: var(--pink);
+    border-radius: 30px;
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1900px;
+    margin: auto;
+    padding: 8px 20px 20px;
+}
+
+/* COMPACT HORIZONTAL CONTROLS */
+
+.search-panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 12px 16px;
+    margin-bottom: 15px;
+}
+
+.horizontal-controls {
+    display: grid;
+    grid-template-columns:
+        minmax(100px, 150px)
+        minmax(100px, 150px)
+        minmax(170px, 220px)
+        105px
+        85px;
+    align-items: end;
+    justify-content: start;
+    gap: 12px;
+}
+
+.control-field {
+    min-width: 0;
+}
+
+.control-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.control-field select {
+    width: 100%;
+    height: 35px;
+    padding: 0 9px;
+    font-size: 12px;
+    background: white;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+}
+
+.control-field select:focus {
+    border-color: var(--pink);
+}
+
+#findRouteBtn, #resetBtn {
+    height: 35px;
+    width: 100%;
+    border: 0;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#findRouteBtn {
+    background: var(--pink);
+    color: white;
+}
+
+#findRouteBtn:hover {
+    background: var(--pink-dark);
+}
+
+#resetBtn {
+    background: var(--pink-light);
+    color: var(--pink);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* TWO-COLUMN DASHBOARD */
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 285px minmax(0, 1fr);
+    align-items: start;
+    gap: 16px;
+}
+
+.info-panel, .map-panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    min-width: 0;
+}
+
+.section-description {
+    margin-bottom: 0;
+    font-size: 12px;
+}
+
+/* RESULTS */
+
+.status-box {
+    background: #fff0f7;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 13px;
+    margin: 15px 0;
+}
+
+.result-label {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    margin-bottom: 7px;
+}
+
+#searchStatus {
+    font-size: 14px;
+    color: var(--pink);
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+#statusMessage {
+    font-size: 11px;
+    margin: 0;
+}
+
+.result-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5e7ee;
+    font-weight: 650;
+    overflow-wrap: anywhere;
+}
+
+.result-item:last-child {
+    border-bottom: 0;
+}
+
+.result-item small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+#routeResult, #explorationResult {
+    line-height: 1.8;
+    font-size: 12px;
+}
+
+/* MAP */
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.map-instructions {
+    background: #fff0f7;
+    border-radius: 9px;
+    color: var(--pink-dark);
+    font-size: 12px;
+    font-weight: 650;
+    padding: 9px 12px;
+    margin-bottom: 12px;
+}
+
+.instruction-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+    margin-right: 6px;
+}
+
+#mapViewport {
+    width: 100%;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f8f8fc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+/* Preserve the original map's proportions */
+
+#mapWrapper {
+    position: relative;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 720 / 1612;
+    max-width: 100%;
+    max-height: 100%;
+    flex-shrink: 0;
+}
+
+#canberraMap {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+#routeOverlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* The SVG itself allows the image underneath to show.
+   Only the vertex circles accept mouse clicks. */
+
+.vertex-hit {
+    fill: transparent;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.vertex-dot {
+    pointer-events: none;
+}
+
+.vertex-label {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    paint-order: stroke;
+    stroke: white;
+    stroke-width: 4px;
+    fill: #253047;
+    pointer-events: none;
+}
+
+.vertex-hit:hover + .vertex-dot {
+    stroke: var(--pink);
+    stroke-width: 5;
+}
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 13px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legend-start { background: #16b86b; }
+.legend-goal { background: #ef4444; }
+.legend-explored { background: #3988f5; }
+.legend-route { background: var(--pink); }
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+    .horizontal-controls {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboard-content {
+        grid-template-columns: 245px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .app-header {
+        flex-wrap: wrap;
+    }
+
+    .app-container {
+        padding: 10px;
+    }
+
+    .horizontal-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #mapViewport {
+        height: 570px;
+    }
+}
+
+@media (max-width: 400px) {
+    .horizontal-controls {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+
+/* ==========================================
+   CLEAN INTERACTIVE MAP
+========================================== */
+
+/* Remove text labels if any old styling remains */
+
+.vertex-label {
+    display: none !important;
+}
+
+/* Allow map circles to receive clicks */
+
+#routeOverlay {
+    pointer-events: none;
+}
+
+.vertex-hit {
+    cursor: pointer;
+    pointer-events: all;
+    fill: transparent;
+}
+
+/* Visible vertex circles */
+
+.vertex-dot {
+    pointer-events: none;
+    transition: fill 0.2s ease;
+}
+
+/* Highlight a circle on hover */
+
+.vertex-hit:hover + .vertex-dot {
+    stroke: #df176c;
+    stroke-width: 5;
+}
+
+/* Keep route lines smooth */
+
+#routeOverlay polyline {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}

@@ -1,0 +1,16 @@
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Private environment variables
+.env
+.env.*
+
+# Build files
+build/
+dist/
