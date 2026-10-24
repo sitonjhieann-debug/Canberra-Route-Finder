@@ -561,3 +561,103 @@ if (mapImage.complete) {
 updateSelectionDisplay();
 updateInstructions();
 drawMap();
+
+
+/* ==========================================================
+   CANBERRA MAP - ZOOM CONTROLS
+   Zooms the map image and SVG route overlay together.
+   ========================================================== */
+
+(function initializeMapZoom() {
+
+    const viewport = document.getElementById("mapViewport");
+    const wrapper = document.getElementById("mapWrapper");
+
+    if (!viewport || !wrapper) {
+        console.error("Map zoom: Map elements were not found.");
+        return;
+    }
+
+    // Zoom configuration
+    let zoomLevel = 1;
+
+    const MIN_ZOOM = 1;
+    const MAX_ZOOM = 3;
+    const ZOOM_STEP = 0.25;
+
+    // Create the toolbar
+    const toolbar = document.createElement("div");
+    toolbar.className = "map-zoom-toolbar";
+
+    toolbar.innerHTML = `
+        <span class="zoom-title">Map Controls</span>
+
+        <div class="zoom-buttons">
+            <button type="button" id="zoomInBtn" title="Zoom In">
+                +
+            </button>
+
+            <button type="button" id="zoomOutBtn" title="Zoom Out">
+                −
+            </button>
+
+            <button type="button" id="resetZoomBtn" title="Reset Zoom">
+                Reset Zoom
+            </button>
+        </div>
+
+        <span id="zoomPercentage">100%</span>
+    `;
+
+    // Place the controls immediately above the map
+    viewport.parentNode.insertBefore(toolbar, viewport);
+
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+    const resetZoomBtn = document.getElementById("resetZoomBtn");
+    const zoomPercentage = document.getElementById("zoomPercentage");
+
+    function updateZoom() {
+
+        // Scale the map and its route overlay as one unit.
+        wrapper.style.transform = `scale(${zoomLevel})`;
+        wrapper.style.transformOrigin = "center center";
+
+        zoomPercentage.textContent =
+            `${Math.round(zoomLevel * 100)}%`;
+
+        zoomInBtn.disabled = zoomLevel >= MAX_ZOOM;
+        zoomOutBtn.disabled = zoomLevel <= MIN_ZOOM;
+        resetZoomBtn.disabled = zoomLevel === 1;
+    }
+
+    // Zoom In
+    zoomInBtn.addEventListener("click", function () {
+        zoomLevel = Math.min(
+            MAX_ZOOM,
+            zoomLevel + ZOOM_STEP
+        );
+
+        updateZoom();
+    });
+
+    // Zoom Out
+    zoomOutBtn.addEventListener("click", function () {
+        zoomLevel = Math.max(
+            MIN_ZOOM,
+            zoomLevel - ZOOM_STEP
+        );
+
+        updateZoom();
+    });
+
+    // Reset Zoom
+    resetZoomBtn.addEventListener("click", function () {
+        zoomLevel = 1;
+        updateZoom();
+    });
+
+    // Initialize at 100%
+    updateZoom();
+
+})();

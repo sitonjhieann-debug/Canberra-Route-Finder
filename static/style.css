@@ -451,3 +451,80 @@ button:disabled {
     stroke-linejoin: round;
     pointer-events: none;
 }
+
+
+/* ==========================================================
+   CANBERRA MAP - ZOOM CONTROLS
+   ========================================================== */
+
+.map-zoom-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    background: #fff0f7;
+    border: 1px solid #f2d9e6;
+    border-radius: 10px;
+
+    padding: 9px 12px;
+    margin-bottom: 10px;
+}
+
+.zoom-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #b90f56;
+}
+
+.zoom-buttons {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.zoom-buttons button {
+    height: 33px;
+    min-width: 36px;
+    padding: 0 12px;
+
+    border: 1px solid #f2d9e6;
+    border-radius: 7px;
+
+    background: white;
+    color: #df176c;
+
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.zoom-buttons button:hover:not(:disabled) {
+    background: #df176c;
+    color: white;
+}
+
+.zoom-buttons button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#zoomPercentage {
+    min-width: 42px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #b90f56;
+    text-align: right;
+}
+
+/* Smoothly zoom the image and SVG together */
+#mapWrapper {
+    transition: transform 0.25s ease;
+    transform-origin: center center;
+}
+
+/* Keep enlarged map inside its viewing area */
+#mapViewport {
+    overflow: hidden;
+}
