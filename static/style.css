@@ -41,6 +41,8 @@ p {
     line-height: 1.5;
 }
 
+/* HEADER */
+
 .app-header {
     display: flex;
     align-items: center;
@@ -70,7 +72,8 @@ p {
     margin: 0;
 }
 
-.header-badge, .map-badge {
+.header-badge,
+.map-badge {
     background: var(--pink-light);
     color: var(--pink);
     border-radius: 30px;
@@ -87,7 +90,7 @@ p {
     padding: 8px 20px 20px;
 }
 
-/* COMPACT HORIZONTAL CONTROLS */
+/* SEARCH CONTROLS */
 
 .search-panel {
     background: white;
@@ -137,7 +140,8 @@ p {
     border-color: var(--pink);
 }
 
-#findRouteBtn, #resetBtn {
+#findRouteBtn,
+#resetBtn {
     height: 35px;
     width: 100%;
     border: 0;
@@ -167,7 +171,7 @@ button:disabled {
     cursor: wait;
 }
 
-/* TWO-COLUMN DASHBOARD */
+/* DASHBOARD */
 
 .dashboard-content {
     display: grid;
@@ -176,7 +180,8 @@ button:disabled {
     gap: 16px;
 }
 
-.info-panel, .map-panel {
+.info-panel,
+.map-panel {
     background: white;
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -189,7 +194,7 @@ button:disabled {
     font-size: 12px;
 }
 
-/* RESULTS */
+/* ROUTE INFORMATION */
 
 .status-box {
     background: #fff0f7;
@@ -238,12 +243,13 @@ button:disabled {
     margin-top: 5px;
 }
 
-#routeResult, #explorationResult {
+#routeResult,
+#explorationResult {
     line-height: 1.8;
     font-size: 12px;
 }
 
-/* MAP */
+/* MAP HEADER */
 
 .map-header {
     display: flex;
@@ -272,12 +278,17 @@ button:disabled {
     margin-right: 6px;
 }
 
+/* MAP VIEWPORT */
+
 #mapViewport {
+    position: relative;
     width: 100%;
     height: 650px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
     background: #f8f8fc;
     border: 1px solid var(--border);
@@ -285,16 +296,23 @@ button:disabled {
     padding: 8px;
 }
 
-/* Preserve the original map's proportions */
+/* MAP IMAGE AND SVG */
 
 #mapWrapper {
     position: relative;
+
     height: 100%;
     width: auto;
+
     aspect-ratio: 720 / 1612;
+
     max-width: 100%;
     max-height: 100%;
+
     flex-shrink: 0;
+
+    transform-origin: center center;
+    transition: transform 0.25s ease;
 }
 
 #canberraMap {
@@ -310,10 +328,10 @@ button:disabled {
     width: 100%;
     height: 100%;
     overflow: visible;
+    pointer-events: none;
 }
 
-/* The SVG itself allows the image underneath to show.
-   Only the vertex circles accept mouse clicks. */
+/* INTERACTIVE VERTICES */
 
 .vertex-hit {
     fill: transparent;
@@ -323,23 +341,148 @@ button:disabled {
 
 .vertex-dot {
     pointer-events: none;
+    transition: fill 0.2s ease;
 }
 
 .vertex-label {
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 19px;
-    font-weight: 800;
-    paint-order: stroke;
-    stroke: white;
-    stroke-width: 4px;
-    fill: #253047;
-    pointer-events: none;
+    display: none !important;
 }
 
 .vertex-hit:hover + .vertex-dot {
     stroke: var(--pink);
     stroke-width: 5;
 }
+
+/* ROUTE LINES */
+
+#routeOverlay polyline {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+/* ==========================================
+   FLOATING ZOOM CONTROLS
+========================================== */
+
+.map-zoom-controls {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    background: white;
+
+    padding: 7px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+}
+
+.map-zoom-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    background: #fff0f7;
+    color: var(--pink);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    font-size: 21px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.map-zoom-controls button:hover:not(:disabled) {
+    background: var(--pink);
+    color: white;
+}
+
+.map-zoom-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* SUPPORT FOR ORIGINAL ZOOM TOOLBAR */
+
+.map-zoom-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    background: #fff0f7;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    padding: 9px 12px;
+    margin-bottom: 10px;
+}
+
+.zoom-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pink-dark);
+}
+
+.zoom-buttons {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.zoom-buttons button {
+    height: 33px;
+    min-width: 36px;
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    background: white;
+    color: var(--pink);
+
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.zoom-buttons button:hover:not(:disabled) {
+    background: var(--pink);
+    color: white;
+}
+
+#zoomPercentage {
+    min-width: 42px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pink-dark);
+    text-align: right;
+}
+
+/* MAP LEGEND */
 
 .map-legend {
     display: flex;
@@ -362,14 +505,26 @@ button:disabled {
     border-radius: 50%;
 }
 
-.legend-start { background: #16b86b; }
-.legend-goal { background: #ef4444; }
-.legend-explored { background: #3988f5; }
-.legend-route { background: var(--pink); }
+.legend-start {
+    background: #16b86b;
+}
 
-/* RESPONSIVE */
+.legend-goal {
+    background: #ef4444;
+}
+
+.legend-explored {
+    background: #3988f5;
+}
+
+.legend-route {
+    background: var(--pink);
+}
+
+/* RESPONSIVE DESIGN */
 
 @media (max-width: 950px) {
+
     .horizontal-controls {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -380,6 +535,7 @@ button:disabled {
 }
 
 @media (max-width: 700px) {
+
     .app-header {
         flex-wrap: wrap;
     }
@@ -402,129 +558,8 @@ button:disabled {
 }
 
 @media (max-width: 400px) {
+
     .horizontal-controls {
         grid-template-columns: minmax(0, 1fr);
     }
-}
-
-
-/* ==========================================
-   CLEAN INTERACTIVE MAP
-========================================== */
-
-/* Remove text labels if any old styling remains */
-
-.vertex-label {
-    display: none !important;
-}
-
-/* Allow map circles to receive clicks */
-
-#routeOverlay {
-    pointer-events: none;
-}
-
-.vertex-hit {
-    cursor: pointer;
-    pointer-events: all;
-    fill: transparent;
-}
-
-/* Visible vertex circles */
-
-.vertex-dot {
-    pointer-events: none;
-    transition: fill 0.2s ease;
-}
-
-/* Highlight a circle on hover */
-
-.vertex-hit:hover + .vertex-dot {
-    stroke: #df176c;
-    stroke-width: 5;
-}
-
-/* Keep route lines smooth */
-
-#routeOverlay polyline {
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    pointer-events: none;
-}
-
-
-/* ==========================================================
-   CANBERRA MAP - ZOOM CONTROLS
-   ========================================================== */
-
-.map-zoom-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    background: #fff0f7;
-    border: 1px solid #f2d9e6;
-    border-radius: 10px;
-
-    padding: 9px 12px;
-    margin-bottom: 10px;
-}
-
-.zoom-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: #b90f56;
-}
-
-.zoom-buttons {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.zoom-buttons button {
-    height: 33px;
-    min-width: 36px;
-    padding: 0 12px;
-
-    border: 1px solid #f2d9e6;
-    border-radius: 7px;
-
-    background: white;
-    color: #df176c;
-
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.zoom-buttons button:hover:not(:disabled) {
-    background: #df176c;
-    color: white;
-}
-
-.zoom-buttons button:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-
-#zoomPercentage {
-    min-width: 42px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #b90f56;
-    text-align: right;
-}
-
-/* Smoothly zoom the image and SVG together */
-#mapWrapper {
-    transition: transform 0.25s ease;
-    transform-origin: center center;
-}
-
-/* Keep enlarged map inside its viewing area */
-#mapViewport {
-    overflow: hidden;
 }

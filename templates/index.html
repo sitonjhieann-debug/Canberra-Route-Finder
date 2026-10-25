@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,10 @@
 
 <body>
 
+<!-- HEADER -->
+
 <header class="app-header">
+
     <div class="brand">
         <div class="brand-icon">✦</div>
 
@@ -23,61 +27,91 @@
         </div>
     </div>
 
-    <span class="header-badge">Data Structures & Algorithms</span>
+    <span class="header-badge">
+        Data Structures & Algorithms
+    </span>
+
 </header>
+
 
 <main class="app-container">
 
-    <!-- COMPACT CONTROLS -->
+    <!-- SEARCH CONTROLS -->
 
     <section class="search-panel">
 
         <div class="horizontal-controls">
 
             <div class="control-field">
+
                 <label for="start">Starting Point</label>
 
                 <select id="start">
                     <option value="">Select Start</option>
 
                     {% for vertex in vertices %}
-                    <option value="{{ vertex }}">{{ vertex }}</option>
+                    <option value="{{ vertex }}">
+                        {{ vertex }}
+                    </option>
                     {% endfor %}
+
                 </select>
+
             </div>
 
+
             <div class="control-field">
+
                 <label for="destination">Destination</label>
 
                 <select id="destination">
                     <option value="">Select Destination</option>
 
                     {% for vertex in vertices %}
-                    <option value="{{ vertex }}">{{ vertex }}</option>
+                    <option value="{{ vertex }}">
+                        {{ vertex }}
+                    </option>
                     {% endfor %}
+
                 </select>
+
             </div>
 
+
             <div class="control-field">
+
                 <label for="algorithm">Search Algorithm</label>
 
                 <select id="algorithm">
+
                     {% for algorithm in algorithms %}
-                    <option value="{{ algorithm }}">{{ algorithm }}</option>
+                    <option value="{{ algorithm }}">
+                        {{ algorithm }}
+                    </option>
                     {% endfor %}
+
                 </select>
+
             </div>
 
-            <button id="findRouteBtn" type="button">Find Route</button>
-            <button id="resetBtn" type="button">Reset</button>
+
+            <button id="findRouteBtn" type="button">
+                Find Route
+            </button>
+
+            <button id="resetBtn" type="button">
+                Reset
+            </button>
 
         </div>
 
     </section>
 
+
     <!-- DASHBOARD -->
 
     <section class="dashboard-content">
+
 
         <!-- LEFT PANEL -->
 
@@ -89,11 +123,18 @@
                 Select your starting point and destination.
             </p>
 
+
+            <!-- SEARCH STATUS -->
+
             <div class="status-box">
 
-                <span class="result-label">SEARCH STATUS</span>
+                <span class="result-label">
+                    SEARCH STATUS
+                </span>
 
-                <div id="searchStatus">Ready to Search</div>
+                <div id="searchStatus">
+                    Ready to Search
+                </div>
 
                 <p id="statusMessage">
                     Click a vertex on the map or use the dropdowns.
@@ -101,75 +142,197 @@
 
             </div>
 
+
+            <!-- ALGORITHM -->
+
             <div class="result-item">
-                <span class="result-label">ALGORITHM USED</span>
+
+                <span class="result-label">
+                    ALGORITHM USED
+                </span>
+
                 <div id="algorithmResult">—</div>
+
             </div>
 
+
+            <!-- START -->
+
             <div class="result-item">
-                <span class="result-label">STARTING POINT</span>
+
+                <span class="result-label">
+                    STARTING POINT
+                </span>
+
                 <div id="startResult">—</div>
+
             </div>
 
+
+            <!-- DESTINATION -->
+
             <div class="result-item">
-                <span class="result-label">DESTINATION</span>
+
+                <span class="result-label">
+                    DESTINATION
+                </span>
+
                 <div id="destinationResult">—</div>
+
             </div>
 
+
+            <!-- COST -->
+
             <div class="result-item">
-                <span class="result-label">TOTAL ROUTE COST</span>
+
+                <span class="result-label">
+                    TOTAL ROUTE COST
+                </span>
+
                 <div id="costResult">—</div>
-                <small>Based on map-coordinate distance</small>
+
+                <small>
+                    Based on map-coordinate distance
+                </small>
+
             </div>
 
+
+            <!-- VISITED -->
+
             <div class="result-item">
-                <span class="result-label">VISITED INTERSECTIONS</span>
+
+                <span class="result-label">
+                    VISITED INTERSECTIONS
+                </span>
+
                 <div id="visitedResult">—</div>
+
             </div>
 
+
+            <!-- FINAL ROUTE -->
+
             <div class="result-item">
-                <span class="result-label">FINAL ROUTE</span>
+
+                <span class="result-label">
+                    FINAL ROUTE
+                </span>
+
                 <div id="routeResult">—</div>
+
             </div>
 
+
+            <!-- EXPLORATION ORDER -->
+
             <div class="result-item">
-                <span class="result-label">EXPLORATION ORDER</span>
+
+                <span class="result-label">
+                    EXPLORATION ORDER
+                </span>
+
                 <div id="explorationResult">—</div>
+
             </div>
 
         </aside>
+
 
         <!-- RIGHT PANEL -->
 
         <section class="map-panel">
 
+
+            <!-- MAP HEADER -->
+
             <div class="map-header">
 
                 <div>
+
                     <h2>Canberra Street Map</h2>
+
                     <p class="section-description">
                         Click vertices to select your route.
                     </p>
+
                 </div>
 
-                <span class="map-badge">32 Vertices · 46 Edges</span>
+                <span class="map-badge">
+                    32 Vertices · 46 Edges
+                </span>
 
             </div>
+
+
+            <!-- MAP INSTRUCTIONS -->
 
             <div class="map-instructions" id="mapInstructions">
+
                 <span class="instruction-dot"></span>
+
                 Step 1: Click a vertex to select your starting point.
+
             </div>
+
+
+            <!-- HORIZONTAL MAP ZOOM TOOLBAR -->
+
+            <div class="map-zoom-toolbar">
+
+                <span class="zoom-title">
+                    Map Controls
+                </span>
+
+                <div class="zoom-buttons">
+
+                    <button
+                        id="zoomInBtn"
+                        type="button"
+                        title="Zoom In">
+                        +
+                    </button>
+
+                    <button
+                        id="zoomOutBtn"
+                        type="button"
+                        title="Zoom Out">
+                        −
+                    </button>
+
+                    <button
+                        id="resetZoomBtn"
+                        type="button"
+                        title="Reset Zoom">
+                        Reset Zoom
+                    </button>
+
+                </div>
+
+                <span id="zoomPercentage">
+                    100%
+                </span>
+
+            </div>
+
+
+            <!-- MAP VIEWPORT -->
 
             <div id="mapViewport">
 
                 <div id="mapWrapper">
+
+                    <!-- MAP IMAGE -->
 
                     <img
                         id="canberraMap"
                         src="{{ url_for('static', filename='CANBERRA MAP.png') }}"
                         alt="Canberra Street Map"
                     >
+
+
+                    <!-- GRAPH OVERLAY -->
 
                     <svg
                         id="routeOverlay"
@@ -181,6 +344,9 @@
                 </div>
 
             </div>
+
+
+            <!-- MAP LEGEND -->
 
             <div class="map-legend">
 
@@ -212,10 +378,15 @@
 
 </main>
 
-<!-- Coordinates provided by Flask -->
+
+<!-- VERTEX DATA FROM FLASK -->
+
 <script id="vertexData" type="application/json">
     {{ vertex_data | tojson }}
 </script>
+
+
+<!-- JAVASCRIPT -->
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
